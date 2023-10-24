@@ -41,6 +41,7 @@ class Setting extends BaseCommand {
       return
     }
 
+    
     if (["true", "false"].indexOf(value) === -1) {
       player.showChatError("invalid value. true/false accepted only")
       return
@@ -48,12 +49,12 @@ class Setting extends BaseCommand {
 
     if (value === 'true') value = true
     if (value === 'false') value = false
-    
-    if (!this.sector.settings[key]) {
+
+   if (this.sector.settings[key] === undefined || this.sector.settings[key] === null) {
       player.showChatError("invalid key. Valid keys are: " + Object.keys(this.sector.settings).join(", "))
       return
     }
-        
+    
     this.sector.editSetting(key, value)
     player.showChatSuccess(key + " set to " + value)
   }
